@@ -19,7 +19,7 @@ export default function PhotoCard({ photo, tripCreatorId, onClick, onDeleteSucce
     setDeleting(true);
     const token = localStorage.getItem("token");
 
-    axios.delete(`http://localhost:4000/photo/${photo._id}`, {
+    axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/photo/${photo._id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

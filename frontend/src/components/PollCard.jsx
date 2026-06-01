@@ -32,7 +32,7 @@ export default function PollCard({ poll, onVoteSuccess, onDeleteSuccess }) {
     setVoting(true);
     const token = localStorage.getItem("token");
 
-    axios.post(`http://localhost:4000/poll/${poll._id}/vote`, { optionIndex }, {
+    axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/poll/${poll._id}/vote`, { optionIndex }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -54,7 +54,7 @@ export default function PollCard({ poll, onVoteSuccess, onDeleteSuccess }) {
     setDeleting(true);
     const token = localStorage.getItem("token");
 
-    axios.delete(`http://localhost:4000/poll/${poll._id}`, {
+    axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/poll/${poll._id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

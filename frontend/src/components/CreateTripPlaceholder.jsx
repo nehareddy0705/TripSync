@@ -73,7 +73,7 @@ export default function CreateTripPlaceholder() {
       body.inviteCode = formData.inviteCode.trim().toUpperCase();
     }
 
-    axios.post("http://localhost:4000/trip", body, {
+    axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/trip`, body, {
       headers: {
         Authorization: `Bearer ${token}`
       }

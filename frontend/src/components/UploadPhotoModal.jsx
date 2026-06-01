@@ -111,7 +111,7 @@ export default function UploadPhotoModal({ isOpen, onClose, tripId, onSuccess })
       // 2. Save metadata to Backend
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:4000/photo",
+        `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/photo`,
         { tripId, imageUrl },
         {
           headers: {

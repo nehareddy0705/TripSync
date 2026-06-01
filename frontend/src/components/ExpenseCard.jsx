@@ -11,7 +11,7 @@ export default function ExpenseCard({ expense, onDeleteSuccess }) {
     setDeleting(true);
     const token = localStorage.getItem("token");
 
-    axios.delete(`http://localhost:4000/expense/${expense._id}`, {
+    axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/expense/${expense._id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

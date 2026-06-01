@@ -41,7 +41,7 @@ export default function ItineraryTab({ tripId }) {
     setLoading(true);
     setErrorMsg("");
 
-    axios.get(`http://localhost:4000/itinerary/${tripId}`, {
+    axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/itinerary/${tripId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -76,7 +76,7 @@ export default function ItineraryTab({ tripId }) {
     setDeleting(true);
     const token = localStorage.getItem("token");
 
-    axios.delete(`http://localhost:4000/itinerary/${activityToDelete}`, {
+    axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/itinerary/${activityToDelete}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

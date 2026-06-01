@@ -18,10 +18,10 @@ import {
   Plane,
   ListTodo
 } from "lucide-react";
-import ItineraryTab from "../components/ItineraryTab";
-import PollsTab from "../components/PollsTab";
-import ExpensesTab from "../components/ExpensesTab";
-import GalleryTab from "../components/GalleryTab";
+import ItineraryTab from "./ItineraryTab";
+import PollsTab from "./PollsTab";
+import ExpensesTab from "./ExpensesTab";
+import GalleryTab from "./GalleryTab";
 
 export default function TripDetails() {
   const { tripId } = useParams();
@@ -53,10 +53,10 @@ export default function TripDetails() {
     const headers = { Authorization: `Bearer ${token}` };
 
     Promise.all([
-      axios.get(`http://localhost:4000/trip/${tripId}`, { headers }),
-      axios.get(`http://localhost:4000/itinerary/${tripId}`, { headers }).catch(() => ({ data: { activities: [] } })),
-      axios.get(`http://localhost:4000/poll/${tripId}`, { headers }).catch(() => ({ data: { polls: [] } })),
-      axios.get(`http://localhost:4000/expense/${tripId}`, { headers }).catch(() => ({ data: { expenses: [] } }))
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/trip/${tripId}`, { headers }),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/itinerary/${tripId}`, { headers }).catch(() => ({ data: { activities: [] } })),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/poll/${tripId}`, { headers }).catch(() => ({ data: { polls: [] } })),
+      axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/expense/${tripId}`, { headers }).catch(() => ({ data: { expenses: [] } }))
     ])
     .then(([tripRes, itineraryRes, pollsRes, expensesRes]) => {
       setTrip(tripRes.data.trip);

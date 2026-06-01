@@ -26,10 +26,10 @@ export default function ExpensesTab({ tripId, members = [] }) {
 
     try {
       const [expensesRes, balancesRes] = await Promise.all([
-        axios.get(`http://localhost:4000/expense/${tripId}`, {
+        axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/expense/${tripId}`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get(`http://localhost:4000/expense/${tripId}/balances`, {
+        axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/expense/${tripId}/balances`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);

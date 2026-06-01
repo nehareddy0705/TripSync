@@ -4,7 +4,7 @@ import LandingPage from "./components/LandingPage";
 import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
 import CreateTripPlaceholder from "./components/CreateTripPlaceholder";
-import TripDetails from "./pages/TripDetails";
+import TripDetails from "./components/TripDetails";
 
 function App() {
   return (

@@ -59,7 +59,7 @@ export default function EditActivityModal({ isOpen, onClose, activity, onSuccess
       date: new Date(date).toISOString()
     };
 
-    axios.put(`http://localhost:4000/itinerary/${activity._id}`, body, {
+    axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/itinerary/${activity._id}`, body, {
       headers: {
         Authorization: `Bearer ${token}`
       }

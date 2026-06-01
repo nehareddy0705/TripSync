@@ -36,7 +36,7 @@ export default function AddActivityModal({ isOpen, onClose, tripId, onSuccess })
       date: new Date(date).toISOString() // Send as standard ISO string
     };
 
-    axios.post("http://localhost:4000/itinerary", body, {
+    axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/itinerary`, body, {
       headers: {
         Authorization: `Bearer ${token}`
       }

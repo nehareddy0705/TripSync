@@ -65,7 +65,7 @@ export default function CreatePollModal({ isOpen, onClose, tripId, onSuccess }) 
       options: filledOptions
     };
 
-    axios.post("http://localhost:4000/poll", body, {
+    axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/poll`, body, {
       headers: {
         Authorization: `Bearer ${token}`
       }

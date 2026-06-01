@@ -59,7 +59,7 @@ export default function Dashboard() {
     setLoading(true);
     setErrorMsg("");
 
-    axios.get("http://localhost:4000/trip", {
+    axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/trip`, {
       headers: {
         Authorization: `Bearer ${activeToken}`
       }
@@ -85,7 +85,7 @@ export default function Dashboard() {
   const handleJoinTripSuccess = async (inviteCode) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.post("http://localhost:4000/trip/join", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/trip/join`, {
         inviteCode
       }, {
         headers: {

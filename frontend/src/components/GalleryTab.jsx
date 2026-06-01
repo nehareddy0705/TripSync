@@ -26,7 +26,7 @@ export default function GalleryTab({ tripId, tripCreatorId }) {
     setLoading(true);
     setErrorMsg("");
 
-    axios.get(`http://localhost:4000/photo/${tripId}`, {
+    axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/photo/${tripId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
