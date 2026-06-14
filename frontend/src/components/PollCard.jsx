@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Trash2, User, Clock, CheckCircle2, BarChart2 } from "lucide-react";
 import axios from "axios";
+import Avatar from "./Avatar";
 
 export default function PollCard({ poll, onVoteSuccess, onDeleteSuccess }) {
   const currentUserStr = localStorage.getItem("user");
@@ -86,10 +87,11 @@ export default function PollCard({ poll, onVoteSuccess, onDeleteSuccess }) {
       {/* Header Info */}
       <div className="flex justify-between items-start gap-4">
         <div className="flex items-center space-x-3">
-          <img
-            src={poll.createdBy?.profilePic || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"}
-            alt={poll.createdBy?.name || "Member"}
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100"
+          <Avatar
+            name={poll.createdBy?.name}
+            imageUrl={poll.createdBy?.profilePic}
+            size="w-10 h-10"
+            roundedClass="rounded-full"
           />
           <div>
             <span className="text-xs font-bold text-slate-400 block leading-none">Created by</span>

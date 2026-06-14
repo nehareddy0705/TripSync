@@ -1,5 +1,6 @@
 import React from "react";
 import { MessageSquare, Calendar, DollarSign, UserPlus, FileText } from "lucide-react";
+import Avatar from "../Avatar";
 
 export default function RecentActivity({ activities = [] }) {
   // Map words to icons for visual representation
@@ -49,10 +50,11 @@ export default function RecentActivity({ activities = [] }) {
             <div key={activity.id || index} className="flex gap-4 items-start group animate-fade-in">
               {/* User Avatar & Sub-Icon */}
               <div className="relative shrink-0">
-                <img
-                  src={activity.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"}
-                  alt={activity.user}
-                  className="w-11 h-11 rounded-full object-cover ring-2 ring-slate-100"
+                <Avatar
+                  name={activity.user}
+                  imageUrl={activity.avatar}
+                  size="w-11 h-11"
+                  roundedClass="rounded-full ring-2 ring-slate-100"
                 />
                 <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border flex items-center justify-center shadow-sm ${color}`}>
                   <Icon className="w-2.5 h-2.5" />

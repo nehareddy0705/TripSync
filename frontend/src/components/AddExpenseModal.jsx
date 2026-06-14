@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X, DollarSign, Users, AlertCircle } from "lucide-react";
 import axios from "axios";
+import Avatar from "./Avatar";
 
 export default function AddExpenseModal({ isOpen, onClose, tripId, members = [], onSuccess }) {
   const [title, setTitle] = useState("");
@@ -238,10 +239,11 @@ export default function AddExpenseModal({ isOpen, onClose, tripId, members = [],
                       readOnly
                       className="w-4.5 h-4.5 rounded border-slate-350 text-teal-500 focus:ring-teal-500"
                     />
-                    <img
-                      src={member.profileImage || member.profilePic || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"}
-                      alt={member.name}
-                      className="w-7 h-7 rounded-full object-cover"
+                    <Avatar
+                      name={member.name}
+                      imageUrl={member.profileImage || member.profilePic}
+                      size="w-7 h-7"
+                      roundedClass="rounded-full"
                     />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-slate-800 leading-none">{member.name}</p>

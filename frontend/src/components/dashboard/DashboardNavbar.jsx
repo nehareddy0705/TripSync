@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Compass, LogOut, User, Settings, Shield } from "lucide-react";
+import { Compass, LogOut } from "lucide-react";
+import Avatar from "../Avatar";
 
 export default function DashboardNavbar({ user, onLogout }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
@@ -15,9 +15,6 @@ export default function DashboardNavbar({ user, onLogout }) {
       navigate("/login");
     }
   };
-
-  // Safe fallback avatar
-  const avatarUrl = user?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white">
@@ -44,72 +41,13 @@ export default function DashboardNavbar({ user, onLogout }) {
               <span className="text-xs text-slate-400">{user?.email || ""}</span>
             </div>
 
-            {/* User Dropdown Toggle */}
-            <div className="relative">
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center space-x-2 p-1.5 rounded-xl border border-slate-800 hover:border-slate-700 hover:bg-slate-800/50 transition-all duration-300 focus:outline-none"
-              >
-                <img
-                  src={avatarUrl}
-                  alt={user?.name || "User profile"}
-                  className="w-8 h-8 rounded-lg object-cover ring-2 ring-teal-500/20"
-                />
-                <span className="text-slate-400 hover:text-slate-200 text-xs hidden sm:inline-block">
-                  &#9662;
-                </span>
-              </button>
-
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <>
-                  {/* Overlay to close on click outside */}
-                  <div
-                    className="fixed inset-0 z-10"
-                    onClick={() => setDropdownOpen(false)}
-                  ></div>
-
-                  <div className="absolute right-0 mt-2.5 w-52 bg-slate-900 border border-slate-850 rounded-2xl shadow-xl py-2 z-20 animate-fade-in divide-y divide-slate-800">
-                    <div className="px-4 py-3 md:hidden">
-                      <p className="text-sm font-semibold text-slate-200 truncate">{user?.name}</p>
-                      <p className="text-xs text-slate-400 truncate">{user?.email}</p>
-                    </div>
-
-                    <div className="py-1">
-                      <button
-                        onClick={() => {
-                          setDropdownOpen(false);
-                          alert("Profile settings features coming soon!");
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-colors"
-                      >
-                        <User className="w-4 h-4 text-teal-400" />
-                        <span>My Profile</span>
-                      </button>
-                      <button
-                        onClick={() => {
-                          setDropdownOpen(false);
-                          alert("System settings features coming soon!");
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-colors"
-                      >
-                        <Settings className="w-4 h-4 text-blue-400" />
-                        <span>Settings</span>
-                      </button>
-                    </div>
-
-                    <div className="py-1">
-                      <button
-                        onClick={handleLogoutClick}
-                        className="w-full text-left px-4 py-2.5 text-sm text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 flex items-center space-x-2 transition-colors"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Sign Out</span>
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
+            {/* User Profile Avatar (dropdown feature removed) */}
+            <div className="flex items-center p-0.5 rounded-lg border border-slate-800">
+              <Avatar
+                name={user?.name}
+                imageUrl={user?.profileImage}
+                size="w-8 h-8"
+              />
             </div>
 
             {/* Quick Logout Button */}

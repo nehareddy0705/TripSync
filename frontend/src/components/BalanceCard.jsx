@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, ArrowRightLeft } from "lucide-react";
+import Avatar from "./Avatar";
 
 export default function BalanceCard({ balance, members = [] }) {
   // Safe helper to extract user ID string
@@ -29,26 +30,25 @@ export default function BalanceCard({ balance, members = [] }) {
   const fromName = fromUser.name || "Squad Member";
   const toName = toUser.name || "Squad Member";
 
-  const fromAvatar = fromUser.profileImage || fromUser.profilePic || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
-  const toAvatar = toUser.profileImage || toUser.profilePic || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
-
   return (
     <div className="bg-slate-50/50 border border-slate-150 rounded-2xl p-4 flex items-center justify-between hover:bg-white hover:shadow-md transition-all duration-300 gap-4 text-left">
       {/* Visual Flow: Avatar 1 -> Arrow -> Avatar 2 */}
       <div className="flex items-center space-x-3.5 min-w-0 flex-1">
         <div className="flex items-center space-x-1 shrink-0">
-          <img
-            src={fromAvatar}
-            alt={fromName}
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
+          <Avatar
+            name={fromName}
+            imageUrl={fromUser.profileImage || fromUser.profilePic}
+            size="w-10 h-10"
+            roundedClass="rounded-full ring-2 ring-white shadow-sm"
           />
           <div className="w-8 h-8 rounded-full bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-655 shadow-sm">
             <ArrowRight className="w-4 h-4" />
           </div>
-          <img
-            src={toAvatar}
-            alt={toName}
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
+          <Avatar
+            name={toName}
+            imageUrl={toUser.profileImage || toUser.profilePic}
+            size="w-10 h-10"
+            roundedClass="rounded-full ring-2 ring-white shadow-sm"
           />
         </div>
 

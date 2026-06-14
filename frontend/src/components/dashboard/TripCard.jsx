@@ -1,5 +1,6 @@
 import React from "react";
 import { Calendar, MapPin, Users, Compass } from "lucide-react";
+import Avatar from "../Avatar";
 
 export default function TripCard({ trip, currentUser, onClick }) {
   const { title, destination, startDate, endDate, inviteCode, creator, members = [] } = trip;
@@ -76,7 +77,7 @@ export default function TripCard({ trip, currentUser, onClick }) {
         </div>
 
         {/* Title */}
-        <h4 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-teal-600 transition-colors duration-250 mb-2">
+        <h4 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-teal-655 transition-colors duration-255 mb-2">
           {title}
         </h4>
 
@@ -101,12 +102,13 @@ export default function TripCard({ trip, currentUser, onClick }) {
         <div className="flex items-center">
           <div className="flex -space-x-2.5 overflow-hidden">
             {members.slice(0, 3).map((member, idx) => (
-              <img
+              <Avatar
                 key={member._id || idx}
-                className="inline-block h-7 w-7 rounded-full object-cover ring-2 ring-white"
-                src={member.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"}
-                alt={member.name}
-                title={member.name}
+                name={member.name}
+                imageUrl={member.profileImage}
+                size="h-7 w-7"
+                textClass="text-[10px]"
+                roundedClass="rounded-full ring-2 ring-white"
               />
             ))}
           </div>

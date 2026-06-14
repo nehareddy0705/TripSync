@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { X, Calendar, User } from "lucide-react";
+import Avatar from "./Avatar";
 
 export default function ImagePreviewModal({ isOpen, onClose, photo }) {
   // Listen for ESC key press to close modal
@@ -36,7 +37,6 @@ export default function ImagePreviewModal({ isOpen, onClose, photo }) {
 
   const uploaderName = photo.uploadedBy?.name || "Squad Member";
   const uploaderEmail = photo.uploadedBy?.email || "";
-  const uploaderAvatar = photo.uploadedBy?.profilePic || photo.uploadedBy?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col md:flex-row items-stretch justify-stretch bg-slate-950/95 backdrop-blur-md animate-fade-in">
@@ -77,10 +77,11 @@ export default function ImagePreviewModal({ isOpen, onClose, photo }) {
           <div className="space-y-3">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Uploaded By</span>
             <div className="flex items-center space-x-3">
-              <img
-                src={uploaderAvatar}
-                alt={uploaderName}
-                className="w-11 h-11 rounded-full object-cover ring-2 ring-slate-700"
+              <Avatar
+                name={uploaderName}
+                imageUrl={photo.uploadedBy?.profilePic || photo.uploadedBy?.profileImage}
+                size="w-11 h-11"
+                roundedClass="rounded-full"
               />
               <div className="min-w-0">
                 <p className="font-extrabold text-sm text-slate-200 truncate leading-none">{uploaderName}</p>

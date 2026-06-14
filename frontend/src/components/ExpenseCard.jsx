@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Trash2, Users, Calendar, Receipt } from "lucide-react";
 import axios from "axios";
+import Avatar from "./Avatar";
 
 export default function ExpenseCard({ expense, onDeleteSuccess }) {
   const [deleting, setDeleting] = useState(false);
@@ -37,7 +38,6 @@ export default function ExpenseCard({ expense, onDeleteSuccess }) {
   };
 
   const paidByName = expense.paidBy?.name || "Squad Member";
-  const paidByAvatar = expense.paidBy?.profilePic || expense.paidBy?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
 
   return (
     <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-4 text-left">
@@ -55,10 +55,12 @@ export default function ExpenseCard({ expense, onDeleteSuccess }) {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-slate-400 font-semibold">
             {/* Paid By Avatar + Name */}
             <div className="flex items-center space-x-1.5">
-              <img
-                src={paidByAvatar}
-                alt={paidByName}
-                className="w-4.5 h-4.5 rounded-full object-cover border border-slate-100"
+              <Avatar
+                name={paidByName}
+                imageUrl={expense.paidBy?.profilePic || expense.paidBy?.profileImage}
+                size="w-4.5 h-4.5"
+                textClass="text-[8px]"
+                roundedClass="rounded-full"
               />
               <span>Paid by <strong className="text-slate-700 font-bold">{paidByName}</strong></span>
             </div>

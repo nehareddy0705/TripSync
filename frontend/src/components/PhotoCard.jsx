@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Trash2, ZoomIn, Clock } from "lucide-react";
 import axios from "axios";
+import Avatar from "./Avatar";
 
 export default function PhotoCard({ photo, tripCreatorId, onClick, onDeleteSuccess }) {
   const currentUserStr = localStorage.getItem("user");
@@ -45,7 +46,6 @@ export default function PhotoCard({ photo, tripCreatorId, onClick, onDeleteSucce
   };
 
   const uploaderName = photo.uploadedBy?.name || "Squad Member";
-  const uploaderAvatar = photo.uploadedBy?.profilePic || photo.uploadedBy?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
 
   return (
     <div
@@ -88,10 +88,11 @@ export default function PhotoCard({ photo, tripCreatorId, onClick, onDeleteSucce
         {/* Bottom bar (Uploader details and upload date) */}
         <div className="space-y-2 select-none">
           <div className="flex items-center space-x-2">
-            <img
-              src={uploaderAvatar}
-              alt={uploaderName}
-              className="w-7 h-7 rounded-full object-cover border border-white/30 shadow"
+            <Avatar
+              name={uploaderName}
+              imageUrl={photo.uploadedBy?.profilePic || photo.uploadedBy?.profileImage}
+              size="w-7 h-7"
+              roundedClass="rounded-full"
             />
             <span className="text-xs font-bold text-slate-100 truncate shadow-sm">
               {uploaderName}

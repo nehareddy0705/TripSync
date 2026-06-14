@@ -22,6 +22,7 @@ import ItineraryTab from "./ItineraryTab";
 import PollsTab from "./PollsTab";
 import ExpensesTab from "./ExpensesTab";
 import GalleryTab from "./GalleryTab";
+import Avatar from "./Avatar";
 
 export default function TripDetails() {
   const { tripId } = useParams();
@@ -344,10 +345,12 @@ export default function TripDetails() {
                     <div className="space-y-1">
                       <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Organized By</span>
                       <div className="flex items-center space-x-2.5 pt-1">
-                        <img 
-                          src={trip.creator?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"} 
-                          alt={trip.creator?.name} 
-                          className="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100"
+                        <Avatar 
+                          name={trip.creator?.name} 
+                          imageUrl={trip.creator?.profileImage} 
+                          size="w-7 h-7" 
+                          textClass="text-[10px]"
+                          roundedClass="rounded-full"
                         />
                         <div>
                           <p className="font-bold text-slate-800 leading-none">{trip.creator?.name}</p>
@@ -386,10 +389,12 @@ export default function TripDetails() {
                           key={member._id} 
                           className="flex items-center space-x-3 p-3 bg-slate-50/50 border border-slate-150 rounded-2xl hover:bg-white hover:shadow-md transition-all duration-200"
                         >
-                          <img 
-                            src={member.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80"} 
-                            alt={member.name} 
-                            className="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100 shrink-0"
+                          <Avatar 
+                            name={member.name} 
+                            imageUrl={member.profileImage} 
+                            size="w-10 h-10" 
+                            textClass="text-sm"
+                            roundedClass="rounded-full"
                           />
                           <div className="min-w-0 text-left">
                             <div className="flex items-center space-x-1.5">

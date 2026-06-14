@@ -1,5 +1,6 @@
 import React from "react";
 import { Edit2, Trash2, Clock, User } from "lucide-react";
+import Avatar from "./Avatar";
 
 export default function ActivityCard({ activity, onEdit, onDelete }) {
   const { title, description, date, createdBy } = activity;
@@ -19,11 +20,8 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
     }
   };
 
-  // Safe fallback avatar
-  const avatarUrl = createdBy?.profilePic || createdBy?.profileImage || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80";
-
   return (
-    <div className="group relative bg-white border border-slate-200 hover:border-slate-350 hover:shadow-lg transition-all duration-300 rounded-2xl p-5 text-left flex items-start justify-between gap-4">
+    <div className="group relative bg-white border border-slate-200 hover:border-slate-355 hover:shadow-lg transition-all duration-300 rounded-2xl p-5 text-left flex items-start justify-between gap-4">
       {/* Indicator Accent Line */}
       <div className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-gradient-to-b from-teal-400 to-blue-500 rounded-r-full"></div>
 
@@ -41,17 +39,19 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
 
         {/* Description */}
         {description && (
-          <p className="text-sm text-slate-500 leading-relaxed break-words">
+          <p className="text-sm text-slate-505 leading-relaxed break-words">
             {description}
           </p>
         )}
 
         {/* Creator Info */}
         <div className="pt-2 flex items-center space-x-2 border-t border-slate-50">
-          <img
-            src={avatarUrl}
-            alt={createdBy?.name || "Member"}
-            className="w-5.5 h-5.5 rounded-full object-cover ring-1 ring-slate-100 shrink-0"
+          <Avatar
+            name={createdBy?.name}
+            imageUrl={createdBy?.profilePic || createdBy?.profileImage}
+            size="w-5.5 h-5.5"
+            textClass="text-[8px]"
+            roundedClass="rounded-full shrink-0"
           />
           <span className="text-[10px] font-semibold text-slate-400 truncate">
             Added by {createdBy?.name || "Group member"}

@@ -1,7 +1,26 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import axios from "axios";
 import "./index.css";
+
+// Global axios response interceptor to handle expired/invalid tokens (e.g. 401 Unauthorized)
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      
+      const currentPath = window.location.pathname;
+      if (currentPath !== "/login" && currentPath !== "/") {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
