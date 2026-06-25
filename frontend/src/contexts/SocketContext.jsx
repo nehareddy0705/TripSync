@@ -82,8 +82,22 @@ export const SocketProvider = ({ children }) => {
       // Append message if it belongs to the active trip chat room
       if (message.tripId === activeTripIdRef.current) {
         setMessages((prev) => {
-          // Avoid appending duplicates (e.g. if already replaced in optimistic UI)
+          // 1. Avoid appending duplicates (if already replaced by REST callback)
           if (prev.some((m) => m._id === message._id)) return prev;
+
+          // 2. Resolve race condition: Check if there's a pending optimistic message from the same sender
+          // If so, replace the optimistic message placeholder with the real message object from the socket.
+          // This ensures that when the REST response subsequently completes, it won't produce a duplicate.
+          const optimisticIndex = prev.findIndex(
+            (m) => m.isPending && m.sender?._id === message.sender?._id
+          );
+          if (optimisticIndex !== -1) {
+            const updated = [...prev];
+            updated[optimisticIndex] = message;
+            return updated;
+          }
+
+          // 3. Otherwise, append the message
           return [...prev, message];
         });
 
