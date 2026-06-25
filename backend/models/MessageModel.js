@@ -36,11 +36,9 @@ const MessageSchema = new Schema(
 );
 
 // Add validator to ensure either text or image is present
-MessageSchema.pre("validate", function (next) {
+MessageSchema.pre("validate", function () {
   if (!this.text && !this.image) {
-    next(new Error("A message must contain either text or an image."));
-  } else {
-    next();
+    throw new Error("A message must contain either text or an image.");
   }
 });
 

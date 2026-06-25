@@ -79,6 +79,7 @@ export const createMessage = async (req, res) => {
       message: populatedMessage,
     });
   } catch (error) {
+    console.error("Error in createMessage:", error);
     res.status(500).json({
       success: false,
       message: error.message,
