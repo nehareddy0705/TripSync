@@ -5,18 +5,23 @@ import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
 import CreateTripPlaceholder from "./components/CreateTripPlaceholder";
 import TripDetails from "./components/TripDetails";
+import TripChat from "./pages/TripChat/TripChat";
+import { SocketProvider } from "./contexts/SocketContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/create-trip" element={<CreateTripPlaceholder />} />
-        <Route path="/trip/:tripId" element={<TripDetails />} />
-      </Routes>
-    </Router>
+    <SocketProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-trip" element={<CreateTripPlaceholder />} />
+          <Route path="/trip/:tripId" element={<TripDetails />} />
+          <Route path="/trip/:tripId/chat" element={<TripChat />} />
+        </Routes>
+      </Router>
+    </SocketProvider>
   );
 }
 

@@ -16,7 +16,8 @@ import {
   ShieldAlert,
   Sparkles,
   Plane,
-  ListTodo
+  ListTodo,
+  MessageCircle
 } from "lucide-react";
 import ItineraryTab from "./ItineraryTab";
 import PollsTab from "./PollsTab";
@@ -287,13 +288,20 @@ export default function TripDetails() {
               { id: "itinerary", label: "Itinerary", icon: ListTodo },
               { id: "polls", label: "Polls", icon: MessageSquare },
               { id: "expenses", label: "Expenses", icon: DollarSign },
-              { id: "gallery", label: "Gallery", icon: ImageIcon }
+              { id: "gallery", label: "Gallery", icon: ImageIcon },
+              { id: "chat", label: "Group Chat", icon: MessageCircle }
             ].map((tab) => {
               const TabIcon = tab.icon;
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    if (tab.id === "chat") {
+                      navigate(`/trip/${tripId}/chat`);
+                    } else {
+                      setActiveTab(tab.id);
+                    }
+                  }}
                   className={`flex items-center space-x-2 pb-3 text-sm font-semibold transition-all duration-200 border-b-2 whitespace-nowrap focus:outline-none ${
                     activeTab === tab.id
                       ? "border-teal-500 text-teal-650"

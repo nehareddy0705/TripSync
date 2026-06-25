@@ -19,6 +19,7 @@ import ActionCard from "./dashboard/ActionCard";
 import TripCard from "./dashboard/TripCard";
 import RecentActivity from "./dashboard/RecentActivity";
 import JoinTripModal from "./dashboard/JoinTripModal";
+import { useSocket } from "../hooks/useSocket";
 
 // Utilities
 import axios from "axios";
@@ -26,6 +27,7 @@ import { getActivities, logActivity } from "../utils/mockData";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { unreadCounts } = useSocket();
   
   // States
   const [currentUser, setCurrentUser] = useState(null);
@@ -328,6 +330,7 @@ export default function Dashboard() {
                     <TripCard
                       trip={trip}
                       currentUser={currentUser}
+                      unreadCount={unreadCounts[trip._id] || 0}
                       onClick={() => navigate(`/trip/${trip._id}`)}
                     />
                   </div>

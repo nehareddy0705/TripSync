@@ -2,7 +2,7 @@ import React from "react";
 import { Calendar, MapPin, Users, Compass } from "lucide-react";
 import Avatar from "../Avatar";
 
-export default function TripCard({ trip, currentUser, onClick }) {
+export default function TripCard({ trip, currentUser, unreadCount = 0, onClick }) {
   const { title, destination, startDate, endDate, inviteCode, creator, members = [] } = trip;
   
   // Format Dates
@@ -77,8 +77,13 @@ export default function TripCard({ trip, currentUser, onClick }) {
         </div>
 
         {/* Title */}
-        <h4 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-teal-655 transition-colors duration-255 mb-2">
-          {title}
+        <h4 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-teal-655 transition-colors duration-255 mb-2 flex items-center flex-wrap gap-2">
+          <span>{title}</span>
+          {unreadCount > 0 && (
+            <span className="bg-rose-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shrink-0 flex items-center gap-1 animate-pulse">
+              🔴 {unreadCount} New Messages
+            </span>
+          )}
         </h4>
 
         {/* Date */}
